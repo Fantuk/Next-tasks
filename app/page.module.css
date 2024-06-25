@@ -1,0 +1,12 @@
+.main {
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+.page {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100vh;
+}
