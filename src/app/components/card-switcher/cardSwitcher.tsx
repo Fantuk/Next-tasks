@@ -1,6 +1,6 @@
-"use client"
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
+import Link from 'next/link'
 
 import { ICard } from '@/app/types/cardType'
 import Card from '../card/card'
@@ -28,9 +28,11 @@ function CardSwitcher() {
 
       if (!data) return <div className='bg-gray-100 flex items-center justify-center'>Loading...</div>
   return (
-    <div className='ps-5 pe-5'>
+    <div className='ps-5 pe-5 flex flex-col gap-5 items-center'>
+      <Link href={`/product/${data.id}`}>
         <Card card={data}/>
-        <div className='flex items-center justify-center gap-3 mt-3'>
+      </Link>
+        <div className='flex items-center gap-3 mt-3'>
             <button className='bg-gray-100 p-2' onClick={() => prevCard()}>&lt;</button>
             <p>{card}/20</p>
             <button className='bg-gray-100 p-2' onClick={() => nextCard()}>&gt;</button>
