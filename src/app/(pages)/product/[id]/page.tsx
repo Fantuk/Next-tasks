@@ -1,25 +1,23 @@
-import { useRouter } from "next/router";
+"use client"
 import React, { useEffect, useState } from "react";
 
 import axios from "axios";
 import { ICard } from "@/app/types/cardType";
 
-function Product() {
-  const router = useRouter();
-  const { id } = router.query;
+function Product({params}: {params: {id: string}}) {
 
   const [data, setData] = useState<ICard>();
 
   useEffect(() => {
-    if (id) {
-      const apiUrl = `https://fakestoreapi.com/products/${id}`;
+    if (params.id) {
+      const apiUrl = `https://fakestoreapi.com/products/${params.id}`;
       axios.get(apiUrl).then((resp) => {
         const cardData = resp.data;
         setData(cardData);
         document.title = `Продукт ${cardData.title}`;
       });
     }
-  }, [id]);
+  }, [params.id]);
 
   if (!data)
     return (
@@ -29,9 +27,9 @@ function Product() {
     );
 
   return (
-    <div className="flex items-center justify-center">
+    <div className="flex flex-col gap-5 items-center justify-center">
       <h1>{data.title}</h1>
-      <img src={data.image} alt={data.title} />
+      <img className="h-48 w-48" src={data.image} alt={data.title} />
       <p>{data.description}</p>
     </div>
   );
